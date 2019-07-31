@@ -15,8 +15,8 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x += 4;
 };
-
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     // x and y are axis, 
@@ -27,12 +27,15 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
+    sprite="images/char-boy.png";
+    x = 300;
+    y = 300;
     update() {
 
     }
 
     render() {
-
+        drawImage(Resources.get(this.sprite), this.x, this.y);
     }//line 105 engine.js
 
     handleInput() {
