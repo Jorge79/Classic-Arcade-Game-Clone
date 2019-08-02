@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = 200;
@@ -27,19 +27,37 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
-    sprite="images/char-boy.png";
-    x = 300;
-    y = 300;
+        sprite = 'images/char-boy.png';
+        x = 202;
+        y = 404;
+
     update() {
 
     }
 
     render() {
-        drawImage(Resources.get(this.sprite), this.x, this.y);
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }//line 105 engine.js
 
-    handleInput() {
-
+    handleInput = function (arrow) {
+        if(arrow == 'left' && this.x > 0) {
+            this.x -= 101;
+        }
+        if (arrow == 'right' && this.x < 404) {
+            this.x += 101;
+        }
+        if(arrow == 'up' && this.y > -8) {
+            this.y -= 83
+            if(this.y == -11) {
+                setTimeout(function restart() {
+                    Player.x = 202;
+                    Player.y = 404;
+                }, 500);
+            }
+        }
+        if(arrow == 'down' && this.y < 404) {
+            this.y += 83
+        }
     }
 }
 
