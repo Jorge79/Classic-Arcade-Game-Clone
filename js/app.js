@@ -2,8 +2,9 @@
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-    this.x = 200;
-    this.y = 200;
+    this.x = 0;
+    this.y = 60;
+    this.s = 100; //Just a test, the speed must be random
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -12,10 +13,17 @@ var Enemy = function(x, y, speed) {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
+    this.x += this.s * dt;
+    /*if(this.x > 705) {
+        this.x = -100;
+    }*/
+    let enemyLeft = this.x - 70;
+    let enemyRight = this.x + 70;
+
+    //if(player.x > enemyLeft)
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += 4;
 };
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
@@ -27,10 +35,14 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
-        sprite = 'images/char-boy.png';
+    sprite = 'images/char-boy.png';
+    x = 202;
+    y = 404;
+
+    /*initPosition() {
         x = 202;
         y = 404;
-
+    */
     update() {
 
     }
@@ -46,13 +58,12 @@ class Player {
         if (arrow == 'right' && this.x < 404) {
             this.x += 101;
         }
-        if(arrow == 'up' && this.y > -8) {
+        if(arrow == 'up') {
             this.y -= 83
             if(this.y == -11) {
-                setTimeout(function restart() {
-                    Player.x = 202;
-                    Player.y = 404;
-                }, 500);
+                    this.x = 202;
+                    this.y = 404;
+                    window.alert("Congratulations, you won!")
             }
         }
         if(arrow == 'down' && this.y < 404) {
